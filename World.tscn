@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://test.png" type="Texture" id=1]
+[ext_resource path="res://TestElement.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 269.387, 185.681 )
+
+[node name="World" type="Node2D"]
+
+[node name="TestElement" type="Area2D" parent="."]
+position = Vector2( 188.104, 121.246 )
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestElement"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="TestElement"]
+scale = Vector2( 0.832337, 0.863104 )
+texture = ExtResource( 1 )
+[connection signal="mouse_entered" from="TestElement" to="TestElement" method="_on_TestElement_mouse_entered"]

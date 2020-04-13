@@ -1,26 +1,22 @@
 extends Area2D
 
+signal selected();
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
+var hovered = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+    pass
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
-
-#func _input_event(viewport, event, shape_idx):
-#    print("hello2")
-#    if event is InputEventMouseButton \
-#    and event.button_index == BUTTON_LEFT \
-#    and event.is_pressed():
-#        print("hello2")
+func _input(event):
+    if event is InputEventMouseButton \
+    and event.button_index == BUTTON_LEFT \
+    and event.is_pressed() \
+    and self.hovered:
+        emit_signal("selected")
 
 func _on_TestElement_mouse_entered():
-    print("entered")
+    self.hovered = true
+
+func _on_TestElement_mouse_exited():
+    self.hovered = false

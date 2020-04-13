@@ -49,12 +49,13 @@ func _on_DownloadHTTPRequest_request_completed(result, response_code, headers, b
     texture_rect.connect("gui_input", self, "_on_TextureRect_gui_input", [texture_rect])
     texture_rect.texture = texture
     texture_rect.expand = true
-    texture_rect.rect_min_size = Vector2(200, 200)
+    texture_rect.rect_min_size = Vector2(164, 164)
     $VBoxContainer/ScrollContainer/ImageGridContainer.add_child(texture_rect)
     
 func _on_TextureRect_gui_input(event, texture_rect):
-    if event is InputEventMouseButton:
-        #TODO generate event with the Image
+    if event is InputEventMouseButton \
+    and event.button_index == BUTTON_LEFT \
+    and not event.is_pressed():
         var texture = texture_rect.texture
         var raw_image = texture.get_data()
-        #raw_image.save_png("user://test.png")
+        emit_signal("image_picked", raw_image)

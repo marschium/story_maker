@@ -1,22 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://test.png" type="Texture" id=1]
-[ext_resource path="res://TestElement.gd" type="Script" id=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 269.387, 185.681 )
+[ext_resource path="res://EditorElement.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World.gd" type="Script" id=3]
 
 [node name="World" type="Node2D"]
+script = ExtResource( 3 )
 
-[node name="TestElement" type="Area2D" parent="."]
-position = Vector2( 188.104, 121.246 )
-scale = Vector2( 0.5, 0.5 )
-script = ExtResource( 2 )
+[node name="EditorElement" parent="." instance=ExtResource( 2 )]
+position = Vector2( 636.098, 363.269 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestElement"]
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="TestElement"]
-scale = Vector2( 0.832337, 0.863104 )
+[node name="Sprite" type="Sprite" parent="EditorElement"]
 texture = ExtResource( 1 )
-[connection signal="mouse_entered" from="TestElement" to="TestElement" method="_on_TestElement_mouse_entered"]
+
+[node name="EditorElement2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 147.719, 141.69 )
+
+[node name="Sprite" type="Sprite" parent="EditorElement2"]
+texture = ExtResource( 1 )

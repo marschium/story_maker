@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://DialogueEditorElement.gd" type="Script" id=1]
+
+[node name="DialogueEditorElement" type="TextEdit"]
+margin_right = 444.0
+margin_bottom = 60.0
+text = "The quick brown fox jumps over the lazy dog"
+readonly = true
+syntax_highlighting = true
+context_menu_enabled = false
+selecting_enabled = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+keyword = "fox"
+[connection signal="cursor_changed" from="." to="." method="_on_DialogueEditorElement_cursor_changed"]

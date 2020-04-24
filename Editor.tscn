@@ -5,7 +5,7 @@
 [ext_resource path="res://Editor.gd" type="Script" id=3]
 [ext_resource path="res://ViewportContainer.gd" type="Script" id=4]
 [ext_resource path="res://EditorMenuButton.gd" type="Script" id=5]
-[ext_resource path="res://Dialogue.tscn" type="PackedScene" id=6]
+[ext_resource path="res://dialogue/Dialogue.tscn" type="PackedScene" id=6]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
@@ -60,7 +60,7 @@ physics_object_picking = true
 margin_left = 1218.0
 margin_right = 1600.0
 margin_bottom = 876.0
-rect_min_size = Vector2( 300, 0 )
+rect_min_size = Vector2( 382, 0 )
 size_flags_vertical = 3
 tab_align = 0
 
@@ -82,6 +82,8 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_horizontal = 1
 [connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="image_picked" from="VBoxContainer/HBoxContainer/TabContainer/Art" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
 [connection signal="add_dialogue" from="VBoxContainer/HBoxContainer/TabContainer/Words" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_Dialogue_add_dialogue"]
+[connection signal="set_dialogue" from="VBoxContainer/HBoxContainer/TabContainer/Words" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_Words_set_dialogue"]

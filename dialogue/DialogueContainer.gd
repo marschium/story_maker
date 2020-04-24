@@ -4,18 +4,15 @@ extends PanelContainer
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-signal add_dialogue(text)
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():
-    pass # Replace with function body.
+func _ready():    
+    var view_size = get_viewport().size
+    rect_size = Vector2(view_size.x, view_size.y / 6)
+    rect_position = Vector2(0, view_size.y - rect_size.y)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #    pass
-
-
-func _on_Button_pressed():
-    emit_signal("add_dialogue", "hello world i am an example")

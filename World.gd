@@ -3,7 +3,7 @@ extends Node2D
 var editor_element = preload("res://EditorElement.tscn")
 var editor_element_class = preload("res://EditorElement.gd")
 
-var dialogue_container = preload("res://dialogue/DialogueContainer.tscn")
+var dialogue_container = preload("res://dialogue/GameDialogueContainer.tscn")
 var dialogue_element = preload("res://dialogue/DialogueEditorElement.tscn")
 var dialogue_element_class = preload("res://dialogue/DialogueEditorElement.gd")
 
@@ -23,10 +23,9 @@ func get_scene_to_save():
             root.add_child(c)
             c.set_owner(root)
         elif child is dialogue_element_class:
-            var dialogues = child.get_dialogue_to_save()
-            # TODO setup ordering and auto swap to next item
-            dc.add_child(dialogues[0])
-            dialogues[0].set_owner(root)
+            for dialogue in child.get_dialogue_to_save():
+                dc.add_child(dialogue)
+                dialogue.set_owner(root)
     return root
     
 func save_resources_to_packer(packer):    
@@ -39,12 +38,7 @@ func _on_PictureDownload_image_picked(image):
     e.set_name("EditorElement")
     e.initalise(image)
     add_child(e)
-
-func _on_Dialogue_add_dialogue(text):
-    var d = dialogue_element.instance()
-    d.set_name("DialogueEditorElement")
-    add_child(d)
-    d.add_text(text)
+    move_child(e, 0)
 
 func _on_Words_set_dialogue(text):
     $DialogueEditorElement.change_text(text)

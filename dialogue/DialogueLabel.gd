@@ -1,9 +1,7 @@
 extends Label
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+signal finished()
 export var text_to_show = ""
 export var chars_per_sec = 2
 
@@ -24,3 +22,5 @@ func _process(delta):
             counter = 0;
             text += text_to_show[char_idx]
             char_idx += 1
+            if char_idx >= text_to_show.length():
+                emit_signal("finished")

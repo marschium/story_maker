@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://dialogue/TemplateDialog.gd" type="Script" id=1]
+
+[node name="TemplateDialog" type="WindowDialog"]
+anchor_left = -0.00104385
+anchor_right = -0.00104385
+margin_left = -0.329834
+margin_right = 410.67
+margin_bottom = 197.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+popup_exclusive = true
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 412.0
+margin_bottom = 198.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpacerTop" type="Control" parent="VBoxContainer"]
+margin_right = 412.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 78.0
+margin_right = 412.0
+margin_bottom = 92.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "THIS IS A TEST"
+align = 1
+autowrap = true
+
+[node name="OptionContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 96.0
+margin_right = 412.0
+margin_bottom = 96.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SpacerBottom" type="Control" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 412.0
+margin_bottom = 174.0
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 178.0
+margin_right = 412.0
+margin_bottom = 198.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CancelButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+visible = false
+margin_left = 161.0
+margin_right = 215.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[node name="OkButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 191.0
+margin_right = 221.0
+margin_bottom = 20.0
+text = "Ok"
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/OkButton" to="." method="_on_OkButton_pressed"]

@@ -1,9 +1,7 @@
 extends ScrollContainer
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var template_dialog = preload("res://dialogue/TemplateDialog.tscn")
 signal template_selected(text)
 
 
@@ -23,5 +21,14 @@ func _ready():
 #func _process(delta):
 #    pass
 
-func _on_Button_pressed(text):
+func _on_Dialog_text_selected(text, dialog):
     emit_signal("template_selected", text)
+    remove_child(dialog)
+    dialog.queue_free()
+
+func _on_Button_pressed(text):
+    var dialog = template_dialog.instance()
+    add_child(dialog)
+    dialog.connect("text_selected", self, "_on_Dialog_text_selected", [dialog])
+    dialog.setup(text, ["hello", "world"])
+    dialog.popup()

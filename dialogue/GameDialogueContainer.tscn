@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://dialogue/DialogueContainer.gd" type="Script" id=1]
+[ext_resource path="res://dialogue/GameDialogueContainer.gd" type="Script" id=1]
 
-[node name="DialogueContainer" type="PanelContainer"]
+[node name="GameDialogueContainer" type="PanelContainer"]
 margin_right = 130.0
 margin_bottom = 64.0
 script = ExtResource( 1 )

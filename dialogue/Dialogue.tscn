@@ -22,19 +22,11 @@ margin_bottom = 461.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-margin_right = 189.0
-margin_bottom = 20.0
-text = "ADD"
-
 [node name="TemplateScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 24.0
 margin_right = 189.0
 margin_bottom = 454.0
 size_flags_vertical = 3
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TemplateScrollContainer"]
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="template_selected" from="VBoxContainer/TemplateScrollContainer" to="." method="_on_Template_selected"]

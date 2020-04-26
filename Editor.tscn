@@ -85,5 +85,4 @@ margin_bottom = -4.0
 size_flags_horizontal = 1
 [connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="image_picked" from="VBoxContainer/HBoxContainer/TabContainer/Art" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
-[connection signal="add_dialogue" from="VBoxContainer/HBoxContainer/TabContainer/Words" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_Dialogue_add_dialogue"]
 [connection signal="set_dialogue" from="VBoxContainer/HBoxContainer/TabContainer/Words" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_Words_set_dialogue"]

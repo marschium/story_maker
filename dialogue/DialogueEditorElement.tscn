@@ -1,11 +1,60 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dialogue/DialogueEditorElement.gd" type="Script" id=1]
+[ext_resource path="res://dialogue/EditorDialogueContainer.gd" type="Script" id=2]
 
 [node name="DialogueEditorElement" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+margin_right = 546.0
+margin_bottom = 281.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 539.0
+margin_bottom = 274.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 532.0
+margin_bottom = 20.0
+size_flags_horizontal = 13
+size_flags_vertical = 13
+alignment = 2
+
+[node name="PrevButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 401.0
+margin_right = 441.0
+margin_bottom = 20.0
+text = "Prev"
+
+[node name="NextButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 445.0
+margin_right = 487.0
+margin_bottom = 20.0
+text = "Next"
+
+[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 491.0
+margin_right = 528.0
+margin_bottom = 20.0
+text = "Add"
+
+[node name="CountLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 532.0
+margin_top = 3.0
+margin_right = 532.0
+margin_bottom = 17.0
+
+[node name="EditorDialogueContainer" type="MarginContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 532.0
+margin_bottom = 24.0
+script = ExtResource( 2 )
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/PrevButton" to="." method="_on_PrevButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/NextButton" to="." method="_on_NextButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddButton" to="." method="_on_AddButton_pressed"]

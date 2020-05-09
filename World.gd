@@ -23,9 +23,8 @@ func get_scene_to_save():
             root.add_child(c)
             c.set_owner(root)
         elif child is dialogue_element_class:
-            for dialogue in child.get_dialogue_to_save():
-                dc.add_child(dialogue)
-                dialogue.set_owner(root)
+            dc.state_dict = child.get_dialogue()
+    root.move_child(dc, get_child_count() - 1)
     return root
     
 func save_resources_to_packer(packer):    

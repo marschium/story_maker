@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://dialogue/DialogueGraphNode.gd" type="Script" id=1]
+
+[node name="DialogueGraphNode" type="GraphNode"]
+margin_right = 270.0
+margin_bottom = 70.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+title = "Dialogue"
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color( 1, 1, 1, 1 )
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 254.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 40 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 65.0
+margin_right = 254.0
+margin_bottom = 85.0
+alignment = 2
+
+[node name="AddOptionButton" type="Button" parent="HBoxContainer"]
+margin_left = 218.0
+margin_right = 238.0
+margin_bottom = 20.0
+size_flags_horizontal = 0
+text = "+"
+[connection signal="pressed" from="HBoxContainer/AddOptionButton" to="." method="_on_AddOptionButton_pressed"]

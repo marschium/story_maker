@@ -10,9 +10,8 @@ func _ready():
     pass
     
 func setup(text, keyword_options):    
-    split_text = text.split("_")
-    $"VBoxContainer/Label".text = text
-    for i in range(len(split_text)):
+    split_text = text.split(" ", false)
+    for i in range(text.count("_")):
         var option_select = OptionButton.new()
         $"VBoxContainer/OptionContainer".add_child(option_select)
         option_select.connect("item_selected", self, "_on_OptionButton_selected", [option_select, i])
@@ -30,9 +29,11 @@ func _update_text():
     var output = ""
     var i = 0
     for frag in split_text:
-        output += frag + " "
-        output += selected_keywords[i] + " "
-        i += 1
+        if frag == "_":
+            output += selected_keywords[i] + " "
+            i += 1
+        else:
+            output += frag + " "
     $"VBoxContainer/Label".text = output.strip_edges()
 
 func _on_OkButton_pressed():

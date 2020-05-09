@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dialogue/GameDialogueContainer.gd" type="Script" id=1]
+[ext_resource path="res://dialogue/DialogueLabel.tscn" type="PackedScene" id=2]
 
 [node name="GameDialogueContainer" type="PanelContainer"]
 margin_right = 130.0
@@ -9,3 +10,11 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DialogueLabel" parent="." instance=ExtResource( 2 )]
+pause_mode = 1
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 123.0
+margin_bottom = 57.0
+[connection signal="finished" from="DialogueLabel" to="." method="_on_DialogueLabel_finished"]

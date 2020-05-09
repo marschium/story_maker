@@ -1,13 +1,9 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
 onready var world = $VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World  
 onready var tab_container = $VBoxContainer/HBoxContainer/TabContainer
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
     pass
 

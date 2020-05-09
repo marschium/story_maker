@@ -1,6 +1,5 @@
 extends Label
 
-
 signal finished()
 export var text_to_show = ""
 export var chars_per_sec = 2

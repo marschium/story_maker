@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://PictureDownload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Editor.gd" type="Script" id=3]
 [ext_resource path="res://ViewportContainer.gd" type="Script" id=4]
 [ext_resource path="res://EditorMenuButton.gd" type="Script" id=5]
-[ext_resource path="res://dialogue/Dialogue.tscn" type="PackedScene" id=6]
 
 [node name="Editor" type="Node2D"]
 script = ExtResource( 3 )
@@ -73,16 +72,5 @@ margin_right = -4.0
 margin_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="Words" parent="VBoxContainer/HBoxContainer/TabContainer" instance=ExtResource( 6 )]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 1
 [connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="image_picked" from="VBoxContainer/HBoxContainer/TabContainer/Art" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
-[connection signal="set_dialogue" from="VBoxContainer/HBoxContainer/TabContainer/Words" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_Words_set_dialogue"]

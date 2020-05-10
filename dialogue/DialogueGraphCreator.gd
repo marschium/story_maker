@@ -45,12 +45,14 @@ func get_dialogue():
     var connections = $VBoxContainer/GraphEdit.get_connection_list()
     for i in range(0, len(connections)):
         var connection = connections[i]
-        var from_node_name = $VBoxContainer/GraphEdit.get_node(connection["from"]).name
-        var to_node_name = $VBoxContainer/GraphEdit.get_node(connection["to"]).name
-        # TODO look at the port and determine if text is set
-        dialogue_dicts[from_node_name]["options"][""] = dialogue_dicts[to_node_name]
+        var from_node = $VBoxContainer/GraphEdit.get_node(connection["from"])
+        var to_node = $VBoxContainer/GraphEdit.get_node(connection["to"])
+        var from_node_name = from_node.name
+        var to_node_name = to_node.name
+        var from_option = from_node.slot_to_option(connection["from_port"])
+        dialogue_dicts[from_node_name]["options"][from_option] = dialogue_dicts[to_node_name]
     
     # TODO get the start node
-    return dialogue_dicts[dialogue_dicts.keys()[0]]
+    return dialogue_dicts[dialogue_dicts.keys()[1]]
     
     

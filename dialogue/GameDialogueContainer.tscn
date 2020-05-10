@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://dialogue/GameDialogueContainer.gd" type="Script" id=1]
-[ext_resource path="res://dialogue/DialogueLabel.tscn" type="PackedScene" id=2]
 
 [node name="GameDialogueContainer" type="PanelContainer"]
 margin_right = 130.0
@@ -11,10 +10,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogueLabel" parent="." instance=ExtResource( 2 )]
-pause_mode = 1
+[node name="VBox" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 123.0
 margin_bottom = 57.0
-[connection signal="finished" from="DialogueLabel" to="." method="_on_DialogueLabel_finished"]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="DialogueContainer" type="MarginContainer" parent="VBox"]
+margin_right = 116.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OptionContainer" type="VBoxContainer" parent="VBox"]
+margin_top = 50.0
+margin_right = 116.0
+margin_bottom = 50.0
+size_flags_horizontal = 3

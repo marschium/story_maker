@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://dialogue/DialogueGraphCreator.gd" type="Script" id=1]
+[ext_resource path="res://dialogue/DialogueStartNode.tscn" type="PackedScene" id=2]
 
 [node name="DialogueGraphCreator" type="Control"]
 anchor_right = 1.0
@@ -35,6 +36,10 @@ size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="DialogueStartNode" parent="VBoxContainer/GraphEdit" instance=ExtResource( 2 )]
+mouse_filter = 1
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/AddButton" to="." method="_on_AddButton_pressed"]
 [connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_connection_request"]
+[connection signal="delete_nodes_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_delete_nodes_request"]
 [connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]

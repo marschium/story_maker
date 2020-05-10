@@ -24,7 +24,6 @@ func _ready():
 func get_text():
     return $TextEdit.text
 
-
 func _on_AddOptionButton_pressed():
     has_options = true
     set_slot(dialogue_out, true, dialogue_in_slot_type, Color(1, 1, 1), false, dialogue_out_slot_type, Color(0, 1, 0)) 

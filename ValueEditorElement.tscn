@@ -1,0 +1,19 @@
+[gd_scene format=2]
+
+[node name="ValueEditorElement" type="HBoxContainer"]
+margin_right = 353.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="NameEdit" type="LineEdit" parent="."]
+margin_right = 174.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Name"
+
+[node name="ValueEdit" type="LineEdit" parent="."]
+margin_left = 178.0
+margin_right = 353.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Value"

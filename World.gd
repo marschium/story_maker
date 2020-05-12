@@ -3,6 +3,8 @@ extends Node2D
 var editor_element = preload("res://EditorElement.tscn")
 var editor_element_class = preload("res://EditorElement.gd")
 
+var state_machine = preload("res://GameStateMachine.tscn")
+
 var dialogue_container = preload("res://dialogue/GameDialogueContainer.tscn")
 var dialogue_element = preload("res://dialogue/DialogueEditorElement.tscn")
 var dialogue_element_class = preload("res://dialogue/DialogueEditorElement.gd")
@@ -15,15 +17,18 @@ func _ready():
 func get_scene_to_save():
     var root = Node2D.new()
     var dc = dialogue_container.instance()
+    var sm = state_machine.instance()
     root.add_child(dc)
     dc.set_owner(root)
+    root.add_child(sm)
+    sm.set_owner(root)
     for child in get_children():
         if child is editor_element_class:
             var c = child.get_item_to_save()
             root.add_child(c)
             c.set_owner(root)
         elif child is dialogue_element_class:
-            dc.state_dict = child.get_dialogue()
+            sm.state_dict = child.get_dialogue()
     root.move_child(dc, get_child_count() - 1)
     return root
     

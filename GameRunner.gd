@@ -1,6 +1,9 @@
 extends Node2D
 
 export var load_path = ""
+var dialogue_node
+var state_machine_node
+var started
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,3 +24,17 @@ func _ready():
         if node && node.has_method("setup"):
             node.setup()
     
+    # connect state changes to dialogue e.t.c
+    dialogue_node = find_node("GameDialogueContainer", true, false)
+    dialogue_node.connect("dialogue_finished", self, "_on_Dialogue_finished")
+    
+    state_machine_node = find_node("GameStateMachine", true, false)
+    state_machine_node.connect("dialogue", dialogue_node, "show_dialogue")
+    
+func _process(delta):
+    if not started:
+        started = true
+        state_machine_node.next_state()
+
+func _on_Dialogue_finished(option_selected):    
+    state_machine_node.next_state([option_selected])

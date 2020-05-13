@@ -7,31 +7,39 @@
 [ext_resource path="res://EditorMenuButton.gd" type="Script" id=5]
 [ext_resource path="res://ValueEditor.tscn" type="PackedScene" id=6]
 
-[node name="Editor" type="Node2D"]
+[node name="Editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 15
+size_flags_vertical = 15
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 1600.0
-margin_bottom = 900.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MenuButton" type="MenuButton" parent="VBoxContainer"]
-margin_right = 38.0
+margin_right = 800.0
 margin_bottom = 20.0
-size_flags_horizontal = 2
+size_flags_horizontal = 3
 text = "FILE"
 script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 24.0
-margin_right = 1600.0
-margin_bottom = 900.0
+margin_right = 800.0
+margin_bottom = 602.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_min_size = Vector2( 1200, 720 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -39,16 +47,16 @@ __meta__ = {
 }
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 1214.0
-margin_bottom = 876.0
+margin_right = 414.0
+margin_bottom = 578.0
 mouse_filter = 1
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 15
+size_flags_vertical = 15
 stretch = true
 script = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/HBoxContainer/ViewportContainer"]
-size = Vector2( 1214, 876 )
+size = Vector2( 414, 578 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -57,9 +65,9 @@ physics_object_picking = true
 [node name="World" parent="VBoxContainer/HBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 1218.0
-margin_right = 1600.0
-margin_bottom = 876.0
+margin_left = 418.0
+margin_right = 800.0
+margin_bottom = 578.0
 rect_min_size = Vector2( 382, 0 )
 size_flags_vertical = 3
 tab_align = 0
@@ -82,5 +90,4 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
-[connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="image_picked" from="VBoxContainer/HBoxContainer/TabContainer/Art" to="VBoxContainer/HBoxContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]

@@ -1,9 +1,15 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ValueEditorElement.gd" type="Script" id=1]
 
 [node name="ValueEditorElement" type="HBoxContainer"]
 margin_right = 353.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="NameEdit" type="LineEdit" parent="."]
 margin_right = 174.0

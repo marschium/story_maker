@@ -8,7 +8,7 @@ signal set_dialogue(text)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    pass # Replace with function body.
+	pass # Replace with function body.
 
 func _on_Template_selected(text):
-    emit_signal("set_dialogue", text)
+	emit_signal("set_dialogue", text)

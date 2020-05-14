@@ -22,10 +22,16 @@ __meta__ = {
 margin_right = 800.0
 margin_bottom = 20.0
 
-[node name="AddButton" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_right = 75.0
+[node name="AddDialogueButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 97.0
 margin_bottom = 20.0
-text = "Add Node"
+text = "Add Dialogue"
+
+[node name="AddSetValueButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 101.0
+margin_right = 201.0
+margin_bottom = 20.0
+text = "Add Set Value"
 
 [node name="GraphEdit" type="GraphEdit" parent="VBoxContainer"]
 margin_top = 24.0
@@ -39,7 +45,7 @@ __meta__ = {
 
 [node name="DialogueStartNode" parent="VBoxContainer/GraphEdit" instance=ExtResource( 2 )]
 mouse_filter = 1
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddButton" to="." method="_on_AddButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddDialogueButton" to="." method="_on_AddButton_pressed"]
 [connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="delete_nodes_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_delete_nodes_request"]
 [connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]

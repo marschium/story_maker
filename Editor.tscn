@@ -6,7 +6,7 @@
 [ext_resource path="res://ViewportContainer.gd" type="Script" id=4]
 [ext_resource path="res://EditorMenuButton.gd" type="Script" id=5]
 [ext_resource path="res://ValueEditor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://dialogue/DialogueEditorElement.tscn" type="PackedScene" id=7]
+[ext_resource path="res://logic/LogicEditorElement.tscn" type="PackedScene" id=7]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -29,7 +29,7 @@ __meta__ = {
 }
 
 [node name="MenuButton" type="MenuButton" parent="VBoxContainer"]
-margin_right = 800.0
+margin_right = 1600.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "FILE"
@@ -37,8 +37,8 @@ script = ExtResource( 5 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 24.0
-margin_right = 800.0
-margin_bottom = 602.0
+margin_right = 1600.0
+margin_bottom = 900.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -48,14 +48,14 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 414.0
-margin_bottom = 578.0
+margin_right = 1214.0
+margin_bottom = 876.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 414.0
-margin_bottom = 287.0
+margin_right = 1214.0
+margin_bottom = 436.0
 mouse_filter = 1
 size_flags_horizontal = 15
 size_flags_vertical = 15
@@ -63,7 +63,7 @@ stretch = true
 script = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/HBoxContainer/VBoxContainer/ViewportContainer"]
-size = Vector2( 414, 287 )
+size = Vector2( 1214, 436 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -72,16 +72,16 @@ physics_object_picking = true
 [node name="World" parent="VBoxContainer/HBoxContainer/VBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 
 [node name="DialogueEditorElement" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
-margin_top = 291.0
-margin_right = 414.0
-margin_bottom = 578.0
+margin_top = 440.0
+margin_right = 1214.0
+margin_bottom = 876.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 418.0
-margin_right = 800.0
-margin_bottom = 578.0
+margin_left = 1218.0
+margin_right = 1600.0
+margin_bottom = 876.0
 rect_min_size = Vector2( 382, 0 )
 size_flags_vertical = 3
 tab_align = 0

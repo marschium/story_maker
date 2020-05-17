@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://dialogue/DialogueGraphCreator.gd" type="Script" id=1]
-[ext_resource path="res://dialogue/DialogueStartNode.tscn" type="PackedScene" id=2]
+[ext_resource path="res://logic/LogicGraphCreator.gd" type="Script" id=1]
+[ext_resource path="res://logic/LogicStartNode.tscn" type="PackedScene" id=2]
 
 [node name="DialogueGraphCreator" type="Control"]
 anchor_right = 1.0
@@ -19,7 +19,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 800.0
+margin_right = 1600.0
 margin_bottom = 20.0
 
 [node name="AddDialogueButton" type="Button" parent="VBoxContainer/HBoxContainer"]
@@ -35,17 +35,18 @@ text = "Add Set Value"
 
 [node name="GraphEdit" type="GraphEdit" parent="VBoxContainer"]
 margin_top = 24.0
-margin_right = 800.0
-margin_bottom = 600.0
+margin_right = 1600.0
+margin_bottom = 900.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="DialogueStartNode" parent="VBoxContainer/GraphEdit" instance=ExtResource( 2 )]
+[node name="LogicStartNode" parent="VBoxContainer/GraphEdit" instance=ExtResource( 2 )]
 mouse_filter = 1
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddDialogueButton" to="." method="_on_AddButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddDialogueButton" to="." method="_on_AddDialogueButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/AddSetValueButton" to="." method="_on_AddSetValueButton_pressed"]
 [connection signal="connection_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_connection_request"]
 [connection signal="delete_nodes_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_delete_nodes_request"]
 [connection signal="disconnection_request" from="VBoxContainer/GraphEdit" to="." method="_on_GraphEdit_disconnection_request"]

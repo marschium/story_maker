@@ -1,14 +1,5 @@
-extends GraphNode
+extends "res://logic/LogicGraphNode.gd"
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-var dialogue_out = 0
-var dialogue_in = 1
-var dialogue_in_slot_type = 1
-var dialogue_out_slot_type = 2
 
 # Called when the node enters the scene tree for the first time.
 func _ready():    

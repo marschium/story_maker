@@ -3,6 +3,7 @@ extends Node2D
 export var load_path = ""
 var dialogue_node
 var state_machine_node
+var value_store
 var started
 
 # Called when the node enters the scene tree for the first time.
@@ -26,11 +27,13 @@ func _ready():
     
     # connect state changes to dialogue e.t.c
     dialogue_node = find_node("GameDialogueContainer", true, false)
+    value_store = find_node("GameValueStore", true, false)
     
     state_machine_node = find_node("GameStateMachine", true, false)
     state_machine_node.connect("end", self, "_on_StateMachine_end")
     state_machine_node.connect("dialogue", self, "_on_StateMachine_dialogue")
     state_machine_node.connect("set_value", self, "_on_StateMachine_set_value")
+    state_machine_node.connect("check_value", self, "_on_StateMachine_check_value")
     
 func _process(delta):
     if not started:
@@ -45,6 +48,13 @@ func _on_StateMachine_dialogue(text, options):
 func _on_StateMachine_set_value(name, value):
     print("set ", name, " to ", value) # todo
     state_machine_node.next_state()
+    
+func _on_StateMachine_check_value(name, condition):
+    print("checking condition on ", name)
+    var res = condition.check(value_store.get(name)) 
+    print("result was: ", res)
+    state_machine_node.next_state([res])
+        
 
 func _on_StateMachine_end():
     print("END")

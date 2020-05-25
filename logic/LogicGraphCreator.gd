@@ -2,8 +2,7 @@ extends Control
 
 var dialogue_node = load("res://logic/DialogueGraphNode.tscn")
 var set_value_node = load("res://logic/SetValueGraphNode.tscn")
-var DialogueNode = load("res://logic/DialogueGraphNode.gd")
-var SetValueNode = load("res://logic/SetValueGraphNode.gd")
+var condition_node = load("res://logic/ConditionGraphNode.tscn")
 
 signal dialogue_saved(dialogue)
 
@@ -26,6 +25,11 @@ func _on_AddSetValueButton_pressed():
     n.connect("close_request", self, "_on_GraphEdit_delete_nodes_request", [n])
     $VBoxContainer/GraphEdit.add_child(n) 
 
+func _on_AddConditionButton_pressed():
+    var n = condition_node.instance()
+    n.connect("close_request", self, "_on_GraphEdit_delete_nodes_request", [n])
+    $VBoxContainer/GraphEdit.add_child(n) 
+
 
 func _on_GraphEdit_connection_request(from, from_slot, to, to_slot):
     for conn in  $VBoxContainer/GraphEdit.get_connection_list():
@@ -38,13 +42,13 @@ func _on_GraphEdit_disconnection_request(from, from_slot, to, to_slot):
     $VBoxContainer/GraphEdit.disconnect_node(from, from_slot, to, to_slot)
 
 
-func _on_GraphEdit_delete_nodes_request(dialogue_node):
+func _on_GraphEdit_delete_nodes_request(node):
     for connection in $VBoxContainer/GraphEdit.get_connection_list():        
-        var from_dialogue_node = $VBoxContainer/GraphEdit.get_node(connection["from"])        
-        var to_dialogue_node = $VBoxContainer/GraphEdit.get_node(connection["to"])
-        if from_dialogue_node == dialogue_node or to_dialogue_node == dialogue_node:
+        var from_node = $VBoxContainer/GraphEdit.get_node(connection["from"])        
+        var to_node = $VBoxContainer/GraphEdit.get_node(connection["to"])
+        if from_node == node or to_node == node:
             $VBoxContainer/GraphEdit.disconnect_node(connection["from"], connection["from_port"], connection["to"], connection["to_port"])
-    dialogue_node.queue_free()
+    node.queue_free()
 
 
 func get_state_machine_dict():
@@ -56,21 +60,8 @@ func get_state_machine_dict():
     for child in $VBoxContainer/GraphEdit.get_children():
         if child == $VBoxContainer/GraphEdit/LogicStartNode:
             continue
-        if child is DialogueNode:
-            var d = {
-                "$type": "dialogue",
-                "text": child.get_text(),
-                "connections": {}
-            }
-            states_dict[child.name] = d
-        elif child is SetValueNode:
-            var d = {
-                "$type": "set_value",
-                "set_value": {
-                    child.get_value_name() : child.get_value()
-                },
-                "connections": {}
-            }
+        if child.has_method("to_dict"): # TODO can check if LogicGraphNode?
+            var d = child.to_dict()
             states_dict[child.name] = d
     
     var connections = $VBoxContainer/GraphEdit.get_connection_list()
@@ -88,5 +79,4 @@ func get_state_machine_dict():
     
     # TODO error if no start
     return states_dict[start_node_name]
-
 

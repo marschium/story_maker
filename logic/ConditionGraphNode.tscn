@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://logic/ConditionGraphNode.gd" type="Script" id=1]
+
+[node name="ConditionGraphNode" type="GraphNode"]
+margin_right = 309.0
+margin_bottom = 90.0
+show_close = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 1, 1, 1, 1 )
+slot/1/left_enabled = false
+slot/1/left_type = 0
+slot/1/left_color = Color( 1, 1, 1, 1 )
+slot/1/right_enabled = false
+slot/1/right_type = 0
+slot/1/right_color = Color( 1, 1, 1, 1 )
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color( 1, 1, 1, 1 )
+slot/2/right_enabled = false
+slot/2/right_type = 0
+slot/2/right_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 293.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="ValueToCheckEdit" type="LineEdit" parent="HBoxContainer"]
+margin_right = 89.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="CheckOptionButton" type="OptionButton" parent="HBoxContainer"]
+margin_left = 93.0
+margin_right = 182.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="ComparisonValueEdit" type="LineEdit" parent="HBoxContainer"]
+margin_left = 186.0
+margin_right = 277.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="TrueLabel" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 49.0
+margin_right = 293.0
+margin_bottom = 63.0
+text = "True"
+align = 2
+
+[node name="FalseLabel" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 64.0
+margin_right = 293.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+text = "False"
+align = 2

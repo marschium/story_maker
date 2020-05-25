@@ -2,7 +2,6 @@
 
 [ext_resource path="res://logic/DialogueGraphNode.gd" type="Script" id=1]
 
-
 [node name="DialogueGraphNode" type="GraphNode"]
 margin_right = 270.0
 margin_bottom = 70.0

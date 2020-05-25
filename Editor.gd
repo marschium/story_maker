@@ -1,13 +1,12 @@
 extends Control
 
 
-onready var world = $VBoxContainer/HBoxContainer/VBoxContainer/ViewportContainer/Viewport/World  
+onready var world = $VBoxContainer/HBoxContainer/VSplitContainer/ViewportContainer/Viewport/World  
 onready var tab_container = $VBoxContainer/HBoxContainer/TabContainer
-onready var dialogue_editor = $VBoxContainer/HBoxContainer/VBoxContainer/DialogueEditorElement
+onready var dialogue_editor = $VBoxContainer/HBoxContainer/VSplitContainer/DialogueEditorElement
 onready var value_editor = $VBoxContainer/HBoxContainer/TabContainer/Values
 
 var state_machine = preload("res://GameStateMachine.tscn")
-var dialogue_container = preload("res://dialogue//GameDialogueContainer.tscn")
 var value_store = preload("res://GameValueStore.tscn")
 
 func _ready():
@@ -23,18 +22,11 @@ func _export_game():
     scene_to_save.add_child(vs)
     vs.set_owner(scene_to_save)
     
-    # dialogue and logic	
-    var dc = dialogue_container.instance()
-    scene_to_save.add_child(dc)
-    dc.set_owner(scene_to_save)
-    
     var sm = state_machine.instance()
     sm.state_dict = dialogue_editor.get_state_machine_dict()	
     scene_to_save.add_child(sm)
     sm.set_owner(scene_to_save)
-    
-    scene_to_save.move_child(dc, get_child_count() - 1) # force dialogue to the front
-    
+        
     var packed_scene = PackedScene.new()
     packed_scene.pack(scene_to_save)
     ResourceSaver.save("user://world.tscn", packed_scene)

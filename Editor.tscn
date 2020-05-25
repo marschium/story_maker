@@ -33,60 +33,58 @@ margin_right = 1600.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 text = "FILE"
+align = 0
 script = ExtResource( 5 )
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
 margin_top = 24.0
 margin_right = 1600.0
 margin_bottom = 900.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+split_offset = 500
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 1214.0
+[node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HSplitContainer"]
+margin_right = 1294.0
 margin_bottom = 876.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 1214.0
-margin_bottom = 436.0
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer"]
+margin_right = 1294.0
+margin_bottom = 432.0
 mouse_filter = 1
-size_flags_horizontal = 15
-size_flags_vertical = 15
+size_flags_horizontal = 3
+size_flags_vertical = 3
 stretch = true
 script = ExtResource( 4 )
 
-[node name="Viewport" type="Viewport" parent="VBoxContainer/HBoxContainer/VBoxContainer/ViewportContainer"]
-size = Vector2( 1214, 436 )
+[node name="Viewport" type="Viewport" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer"]
+size = Vector2( 1294, 432 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 physics_object_picking = true
 
-[node name="World" parent="VBoxContainer/HBoxContainer/VBoxContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+[node name="World" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
+position = Vector2( 5, 5 )
 
-[node name="DialogueEditorElement" parent="VBoxContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 7 )]
-margin_top = 440.0
-margin_right = 1214.0
+[node name="DialogueEditorElement" parent="VBoxContainer/HSplitContainer/VSplitContainer" instance=ExtResource( 7 )]
+margin_top = 444.0
+margin_right = 1294.0
 margin_bottom = 876.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HBoxContainer"]
-margin_left = 1218.0
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer/HSplitContainer"]
+margin_left = 1306.0
 margin_right = 1600.0
 margin_bottom = 876.0
-rect_min_size = Vector2( 382, 0 )
+size_flags_horizontal = 11
 size_flags_vertical = 3
 tab_align = 0
 
-[node name="Art" parent="VBoxContainer/HBoxContainer/TabContainer" instance=ExtResource( 1 )]
+[node name="Art" parent="VBoxContainer/HSplitContainer/TabContainer" instance=ExtResource( 1 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -96,7 +94,7 @@ margin_bottom = -4.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="Values" parent="VBoxContainer/HBoxContainer/TabContainer" instance=ExtResource( 6 )]
+[node name="Values" parent="VBoxContainer/HSplitContainer/TabContainer" instance=ExtResource( 6 )]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -104,5 +102,7 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 [connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
-[connection signal="image_picked" from="VBoxContainer/HBoxContainer/TabContainer/Art" to="VBoxContainer/HBoxContainer/VBoxContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
+[connection signal="image_picked" from="VBoxContainer/HSplitContainer/TabContainer/Art" to="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]

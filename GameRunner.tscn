@@ -1,7 +1,22 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://GameRunner.gd" type="Script" id=1]
+[ext_resource path="res://dialogue/GameDialogueContainer.tscn" type="PackedScene" id=2]
 
-[node name="GameRunner" type="Node2D"]
+[node name="Gamerunner" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+alignment = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 load_path = "C:\\Users\\marsh\\AppData\\Roaming\\Godot\\app_userdata\\creator\\game.pck"
+
+[node name="GameDialogueContainer" parent="." instance=ExtResource( 2 )]
+margin_top = 600.0
+margin_right = 1600.0
+margin_bottom = 900.0
+rect_min_size = Vector2( 0, 300 )
+size_flags_horizontal = 3

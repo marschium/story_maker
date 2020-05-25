@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 export var load_path = ""
 var dialogue_node
@@ -8,6 +8,7 @@ var started
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    
     var res = ProjectSettings.load_resource_pack(load_path)
     var World = ResourceLoader.load("res://main.tscn")
     var world = World.instance()
@@ -27,6 +28,8 @@ func _ready():
     
     # connect state changes to dialogue e.t.c
     dialogue_node = find_node("GameDialogueContainer", true, false)
+    # todo resize/move dialogue node to bottom 1/3 of screen
+    
     value_store = find_node("GameValueStore", true, false)
     
     state_machine_node = find_node("GameStateMachine", true, false)
@@ -47,6 +50,7 @@ func _on_StateMachine_dialogue(text, options):
     
 func _on_StateMachine_set_value(name, value):
     print("set ", name, " to ", value) # todo
+    value_store.set(name, value)
     state_machine_node.next_state()
     
 func _on_StateMachine_check_value(name, condition):

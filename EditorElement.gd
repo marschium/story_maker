@@ -3,6 +3,7 @@ extends Area2D
 var hovered = false
 var bounds = Vector2(0,0)
 var button_down = false
+var mouse_offset = Vector2(0, 0)
 var modify_key = false
 
 # Called when the node enters the scene tree for the first time.
@@ -43,15 +44,7 @@ func _on_EditorElement_input_event(viewport, event, shape_idx):
     
     # move
     if event is InputEventMouseMotion and self.button_down:
-        position = event.position
-        if position.x < 0:
-            position.x = 0
-        if position.y < 0:
-            position.y = 0
-        if position.x > bounds.x:
-            position.x = bounds.x
-        if position.y > bounds.y:
-            position.y = bounds.y    
+        position = event.position - mouse_offset 
     
     # scale and rotate
     if event is InputEventMouseButton \
@@ -74,5 +67,6 @@ func _on_EditorElement_input_event(viewport, event, shape_idx):
     if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:        
         if event.is_pressed():
             self.button_down = true
+            self.mouse_offset = Vector2(event.position.x - position.x, event.position.y - position.y)
         else:
             self.button_down = false

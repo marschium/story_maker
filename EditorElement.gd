@@ -1,7 +1,8 @@
-extends Area2D
+extends Node2D
 
 var hovered = false
 var bounds = Vector2(0,0)
+var mouse_over = false
 var button_down = false
 var mouse_offset = Vector2(0, 0)
 var modify_key = false
@@ -9,9 +10,6 @@ var modify_key = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
     bounds = get_viewport().size
-
-func _input(event): 
-    return
 
 func _process(delta):
     modify_key = false
@@ -27,8 +25,9 @@ func initalise(image):
     add_child(s)
     s.set_owner(self)
     var shape = RectangleShape2D.new()
-    shape.extents = image.get_size() / 2
-    $CollisionShape2D.shape = shape  
+    shape.extents = image.get_size()
+    $Button.rect_position = (image.get_size() / 2) * -1
+    $Button.rect_min_size = image.get_size()  
     
 func get_item_to_save():
     var sprite = $Sprite.duplicate()
@@ -40,11 +39,12 @@ func get_item_to_save():
 func save_resources_to_packer(packer):
     packer.add_file($Sprite.texture.resource_path, $Sprite.texture.resource_path)
 
-func _on_EditorElement_input_event(viewport, event, shape_idx):                
+func _input(event):                
     
     # move
     if event is InputEventMouseMotion and self.button_down:
         position = event.position - mouse_offset 
+        get_tree().set_input_as_handled()
     
     # scale and rotate
     if event is InputEventMouseButton \
@@ -64,9 +64,32 @@ func _on_EditorElement_input_event(viewport, event, shape_idx):
             scale = Vector2(scale.x + 0.05, scale.y + 0.05)
             
     # click        
-    if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:        
+    if event is InputEventMouseButton \
+    and self.mouse_over \
+    and event.button_index == BUTTON_LEFT:        
         if event.is_pressed():
             self.button_down = true
             self.mouse_offset = Vector2(event.position.x - position.x, event.position.y - position.y)
         else:
             self.button_down = false
+
+
+func _on_EditorElement_mouse_entered():
+    pass
+    #self.mouse_over = true
+
+
+func _on_EditorElement_mouse_exited():
+    pass
+    #self.mouse_over = false
+    #self.button_down = false
+
+
+func _on_Button_button_down():    
+    self.button_down = true
+    self.mouse_over = true
+
+
+func _on_Button_button_up():  
+    self.button_down = false
+    self.mouse_over = false

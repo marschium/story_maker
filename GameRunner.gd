@@ -5,13 +5,16 @@ var dialogue_node
 var state_machine_node
 var value_store
 var started
+var world 
+var current_scene_idx = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     
     var res = ProjectSettings.load_resource_pack(load_path)
     var World = ResourceLoader.load("res://main.tscn")
-    var world = World.instance()
+    
+    world = World.instance()
     add_child(world)
     
     var state = World.get_state()
@@ -25,6 +28,8 @@ func _ready():
                 node.set(pname, pvalue)
         if node && node.has_method("setup"):
             node.setup()
+            
+    # todo change images when scene changes
     
     # connect state changes to dialogue e.t.c
     dialogue_node = find_node("GameDialogueContainer", true, false)
@@ -37,6 +42,14 @@ func _ready():
     state_machine_node.connect("dialogue", self, "_on_StateMachine_dialogue")
     state_machine_node.connect("set_value", self, "_on_StateMachine_set_value")
     state_machine_node.connect("check_value", self, "_on_StateMachine_check_value")
+    
+    show_scene(0)
+    
+func show_scene(id):
+    current_scene_idx = id
+    for c in world.get_children():
+        c.visible = false
+    world.get_child(current_scene_idx).visible = true
     
 func _process(delta):
     if not started:
@@ -62,3 +75,9 @@ func _on_StateMachine_check_value(name, condition):
 
 func _on_StateMachine_end():
     print("END")
+    if state_machine_node.has_scenes_to_play():
+        yield(get_tree().create_timer(5), "timeout")
+        show_scene(current_scene_idx + 1)
+        state_machine_node.next_scene()
+        state_machine_node.next_state()
+    # TODO swap to new scene if there is one

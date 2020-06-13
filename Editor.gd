@@ -1,10 +1,10 @@
 extends Control
 
 
-onready var world = $VBoxContainer/HBoxContainer/VSplitContainer/ViewportContainer/Viewport/World  
-onready var tab_container = $VBoxContainer/HBoxContainer/TabContainer
-onready var dialogue_editor = $VBoxContainer/HBoxContainer/VSplitContainer/DialogueEditorElement
-onready var value_editor = $VBoxContainer/HBoxContainer/TabContainer/Values
+onready var world = $VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World  
+onready var tab_container = $VBoxContainer/HSplitContainer/TabContainer
+onready var dialogue_editor = $VBoxContainer/HSplitContainer/VSplitContainer/DialogueEditorElement
+onready var value_editor = $VBoxContainer/HSplitContainer/TabContainer/Values
 
 var state_machine = preload("res://GameStateMachine.tscn")
 var value_store = preload("res://GameValueStore.tscn")
@@ -39,3 +39,11 @@ func _export_game():
 
 func _on_MenuButton_save_selected():
     _export_game()
+
+func _on_Scenes_scene_added():
+    world.add_scene()
+    dialogue_editor.add_scene()
+
+func _on_Scenes_scene_changed(id):
+    world.change_to_scene(id)
+    dialogue_editor.change_to_scene(id)

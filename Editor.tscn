@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://PictureDownload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.tscn" type="PackedScene" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://EditorMenuButton.gd" type="Script" id=5]
 [ext_resource path="res://ValueEditor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://logic/LogicEditorElement.tscn" type="PackedScene" id=7]
+[ext_resource path="res://SceneSelectEditor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ScreenOutline.gd" type="Script" id=9]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -66,8 +68,16 @@ usage = 0
 render_target_update_mode = 3
 physics_object_picking = true
 
+[node name="ScreenOutline" type="Node2D" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport"]
+position = Vector2( 10, 0 )
+script = ExtResource( 9 )
+screen_size = Vector2( 1200, 600 )
+
 [node name="World" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport" instance=ExtResource( 2 )]
 position = Vector2( 5, 5 )
+
+[node name="Node2D" type="Node2D" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World"]
+position = Vector2( -5, -5 )
 
 [node name="DialogueEditorElement" parent="VBoxContainer/HSplitContainer/VSplitContainer" instance=ExtResource( 7 )]
 margin_top = 444.0
@@ -104,5 +114,16 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="Scenes" parent="VBoxContainer/HSplitContainer/TabContainer" instance=ExtResource( 8 )]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 [connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="image_picked" from="VBoxContainer/HSplitContainer/TabContainer/Art" to="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
+[connection signal="scene_added" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_added"]
+[connection signal="scene_changed" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_changed"]

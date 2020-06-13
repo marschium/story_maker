@@ -46,6 +46,7 @@ class NotEqualCondition:
 
 export var state_dict = {}
 var current_state = StateNode.new()
+var current_scene_idx = 0
 
 func _create_state(dict):
     if dict["$type"] == "dialogue":
@@ -80,10 +81,19 @@ func _ready():
     pass # Replace with function body.
 
 func setup():
-    var first_state = _create_state(state_dict)
-    _connect_state(first_state, state_dict)
+    # TODO store the current scene so that multiple scenes can be played
+    current_state = StateNode.new()
+    var current_scene_dict = state_dict["scenes"][current_scene_idx]
+    var first_state = _create_state(current_scene_dict)
+    _connect_state(first_state, current_scene_dict)
     current_state.connections[""] = first_state
     
+func has_scenes_to_play():
+    return current_scene_idx + 1 < len(state_dict["scenes"])
+    
+func next_scene():
+    current_scene_idx += 1
+    setup()    
     
 func next_state(args=[]):
     

@@ -47,3 +47,7 @@ func _on_Scenes_scene_added():
 func _on_Scenes_scene_changed(id):
     world.change_to_scene(id)
     dialogue_editor.change_to_scene(id)
+
+func _on_ScreenshotTimer_timeout():
+    var screenshot = $VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer.screenshot()
+    $VBoxContainer/HSplitContainer/TabContainer/Scenes.set_current_screenshot(screenshot)

@@ -11,9 +11,14 @@ func _ready():
     pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#    pass
+func screenshot():    
+    var img = $Viewport.get_texture().get_data()
+    img.flip_y()
+    #yield(get_tree(), "idle_frame")
+    #yield(get_tree(), "idle_frame")
+    var tex = ImageTexture.new()
+    tex.create_from_image(img)
+    return tex
 
 func _gui_input(event):
     #print(event)

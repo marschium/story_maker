@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://SceneSelectEditor.gd" type="Script" id=1]
+[ext_resource path="res://SceneSelectOption.tscn" type="PackedScene" id=2]
 
 [node name="SceneSelectEditor" type="PanelContainer"]
 margin_right = 407.0
@@ -38,8 +39,5 @@ margin_bottom = 631.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Button" type="Button" parent="VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_right = 393.0
-margin_bottom = 20.0
-text = "Scene 1"
+[node name="SceneSelectOption" parent="VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]

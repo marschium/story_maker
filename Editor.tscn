@@ -20,6 +20,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ScreenshotTimer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -70,6 +74,7 @@ physics_object_picking = true
 
 [node name="ScreenOutline" type="Node2D" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport"]
 position = Vector2( 10, 0 )
+z_index = 1
 script = ExtResource( 9 )
 screen_size = Vector2( 1200, 600 )
 
@@ -123,6 +128,7 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+[connection signal="timeout" from="ScreenshotTimer" to="." method="_on_ScreenshotTimer_timeout"]
 [connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="image_picked" from="VBoxContainer/HSplitContainer/TabContainer/Art" to="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
 [connection signal="scene_added" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_added"]

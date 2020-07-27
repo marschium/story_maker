@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://SceneSelectOption.gd" type="Script" id=1]
+
+[node name="SceneSelectOption" type="PanelContainer"]
+margin_right = 393.0
+margin_bottom = 214.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 386.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 0, 200 )
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

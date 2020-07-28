@@ -51,3 +51,7 @@ func _on_Scenes_scene_changed(id):
 func _on_ScreenshotTimer_timeout():
     var screenshot = $VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer.screenshot()
     $VBoxContainer/HSplitContainer/TabContainer/Scenes.set_current_screenshot(screenshot)
+
+func _on_RunButton_pressed():
+    _export_game()
+    OS.execute("bin/runner.exe", [])

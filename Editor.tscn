@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://PictureDownload.tscn" type="PackedScene" id=1]
 [ext_resource path="res://World.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://logic/LogicEditorElement.tscn" type="PackedScene" id=7]
 [ext_resource path="res://SceneSelectEditor.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ScreenOutline.gd" type="Script" id=9]
+[ext_resource path="res://default_theme.tres" type="Theme" id=10]
 
 [node name="Editor" type="Control"]
 anchor_right = 1.0
@@ -34,16 +35,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MenuButton" type="MenuButton" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 1600.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
+margin_bottom = 14.0
+
+[node name="MenuButton" type="MenuButton" parent="VBoxContainer/HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 14.0
+theme = ExtResource( 10 )
 text = "FILE"
 align = 0
 script = ExtResource( 5 )
 
+[node name="RunButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 40.0
+margin_right = 78.0
+margin_bottom = 14.0
+theme = ExtResource( 10 )
+text = "RUN"
+
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 24.0
+margin_top = 18.0
 margin_right = 1600.0
 margin_bottom = 900.0
 size_flags_horizontal = 3
@@ -52,13 +64,13 @@ split_offset = 500
 
 [node name="VSplitContainer" type="VSplitContainer" parent="VBoxContainer/HSplitContainer"]
 margin_right = 1294.0
-margin_bottom = 876.0
+margin_bottom = 882.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/HSplitContainer/VSplitContainer"]
 margin_right = 1294.0
-margin_bottom = 432.0
+margin_bottom = 435.0
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -66,7 +78,7 @@ stretch = true
 script = ExtResource( 4 )
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer"]
-size = Vector2( 1294, 432 )
+size = Vector2( 1294, 435 )
 handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
@@ -85,16 +97,16 @@ position = Vector2( 5, 5 )
 position = Vector2( -5, -5 )
 
 [node name="DialogueEditorElement" parent="VBoxContainer/HSplitContainer/VSplitContainer" instance=ExtResource( 7 )]
-margin_top = 444.0
+margin_top = 447.0
 margin_right = 1294.0
-margin_bottom = 876.0
+margin_bottom = 882.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/HSplitContainer"]
 margin_left = 1306.0
 margin_right = 1600.0
-margin_bottom = 876.0
+margin_bottom = 882.0
 size_flags_horizontal = 11
 size_flags_vertical = 3
 tab_align = 0
@@ -129,7 +141,8 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 [connection signal="timeout" from="ScreenshotTimer" to="." method="_on_ScreenshotTimer_timeout"]
-[connection signal="save_selected" from="VBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
+[connection signal="save_selected" from="VBoxContainer/HBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/RunButton" to="." method="_on_RunButton_pressed"]
 [connection signal="image_picked" from="VBoxContainer/HSplitContainer/TabContainer/Art" to="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
 [connection signal="scene_added" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_added"]
 [connection signal="scene_changed" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_changed"]

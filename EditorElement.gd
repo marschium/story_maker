@@ -62,17 +62,6 @@ func _input(event):
             rotation_degrees += 10
         else:
             scale = Vector2(scale.x + 0.05, scale.y + 0.05)
-            
-    # click        
-    if event is InputEventMouseButton \
-    and self.mouse_over \
-    and event.button_index == BUTTON_LEFT:        
-        if event.is_pressed():
-            self.button_down = true
-            self.mouse_offset = Vector2(event.position.x - position.x, event.position.y - position.y)
-        else:
-            self.button_down = false
-
 
 func _on_EditorElement_mouse_entered():
     pass
@@ -86,6 +75,8 @@ func _on_EditorElement_mouse_exited():
 
 
 func _on_Button_button_down():    
+    var e = get_global_mouse_position()
+    self.mouse_offset = Vector2(e.x - position.x, e.y - position.y)
     self.button_down = true
     self.mouse_over = true
 

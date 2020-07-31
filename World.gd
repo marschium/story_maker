@@ -39,12 +39,6 @@ func save_resources_to_packer(packer):
         for child in scene.get_children():
             if child is editor_element_class:
                 child.save_resources_to_packer(packer)
-            
-#func _unhandled_input(event):
-#    if event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_DOWN:
-#        scale -= Vector2(0.1, 0.1)
-#    elif event is InputEventMouseButton and event.button_index == BUTTON_WHEEL_UP:
-#        scale += Vector2(0.1, 0.1)
 
 func _on_PictureDownload_image_picked(image):
     var e = editor_element.instance()

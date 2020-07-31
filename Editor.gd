@@ -54,4 +54,7 @@ func _on_ScreenshotTimer_timeout():
 
 func _on_RunButton_pressed():
     _export_game()
-    OS.execute("bin/runner.exe", [])
+    if OS.has_feature('editor'):
+        OS.execute("bin/runner.exe", [])
+    else:
+        OS.execute("runner.exe", [])

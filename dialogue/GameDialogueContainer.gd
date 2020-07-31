@@ -31,6 +31,7 @@ func show_dialogue(text, options=[]):
             b.text = option
             b.connect("pressed", self, "_on_OptionButton_pressed", [option])
             $VBox/OptionContainer.add_child(b)
+        # TODO if no options auto finish after a small delay
         var res = yield(self, "dialogue_finished")
         return res
     else:

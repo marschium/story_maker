@@ -88,7 +88,7 @@ physics_object_picking = true
 
 [node name="ScreenOutline" type="Node2D" parent="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport"]
 position = Vector2( 10, 0 )
-z_index = 1
+z_index = 4096
 script = ExtResource( 9 )
 screen_size = Vector2( 1200, 600 )
 

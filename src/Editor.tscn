@@ -113,7 +113,7 @@ size_flags_horizontal = 11
 size_flags_vertical = 3
 tab_align = 0
 
-[node name="Art" parent="VBoxContainer/HSplitContainer/TabContainer" instance=ExtResource( 1 )]
+[node name="Images" parent="VBoxContainer/HSplitContainer/TabContainer" instance=ExtResource( 1 )]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -145,6 +145,6 @@ margin_bottom = -4.0
 [connection signal="timeout" from="ScreenshotTimer" to="." method="_on_ScreenshotTimer_timeout"]
 [connection signal="save_selected" from="VBoxContainer/HBoxContainer/MenuButton" to="." method="_on_MenuButton_save_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/RunButton" to="." method="_on_RunButton_pressed"]
-[connection signal="image_picked" from="VBoxContainer/HSplitContainer/TabContainer/Art" to="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
+[connection signal="image_picked" from="VBoxContainer/HSplitContainer/TabContainer/Images" to="VBoxContainer/HSplitContainer/VSplitContainer/ViewportContainer/Viewport/World" method="_on_PictureDownload_image_picked"]
 [connection signal="scene_added" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_added"]
 [connection signal="scene_changed" from="VBoxContainer/HSplitContainer/TabContainer/Scenes" to="." method="_on_Scenes_scene_changed"]

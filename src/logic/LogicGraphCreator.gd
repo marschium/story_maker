@@ -16,17 +16,20 @@ func _ready():
 
 func _on_AddDialogueButton_pressed():
     var n = dialogue_node.instance()
+    n.offset = Vector2(0, 96)
     n.connect("close_request", self, "_on_GraphEdit_delete_nodes_request", [n])
     $VBoxContainer/GraphEdit.add_child(n)  
 
 
 func _on_AddSetValueButton_pressed():
     var n = set_value_node.instance()
+    n.offset = Vector2(0, 96)
     n.connect("close_request", self, "_on_GraphEdit_delete_nodes_request", [n])
     $VBoxContainer/GraphEdit.add_child(n) 
 
 func _on_AddConditionButton_pressed():
     var n = condition_node.instance()
+    n.offset = Vector2(0, 96)
     n.connect("close_request", self, "_on_GraphEdit_delete_nodes_request", [n])
     $VBoxContainer/GraphEdit.add_child(n) 
 

@@ -27,8 +27,11 @@ func show_dialogue(text, options=[]):
     # todo clear dialogue
     if options:
         for option in options:
+            var button_text = option
+            if not button_text:
+                button_text = "next"
             var b = Button.new()
-            b.text = option
+            b.text = button_text
             b.connect("pressed", self, "_on_OptionButton_pressed", [option])
             $VBox/OptionContainer.add_child(b)
         # TODO if no options auto finish after a small delay

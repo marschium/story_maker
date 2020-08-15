@@ -59,3 +59,7 @@ func _on_TextureRect_gui_input(event, texture_rect):
         var texture = texture_rect.texture
         var raw_image = texture.get_data()
         emit_signal("image_picked", raw_image)
+
+
+func _on_SearchLineEdit_text_entered(new_text):
+    _on_SearchButton_pressed()

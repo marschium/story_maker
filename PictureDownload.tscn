@@ -16,7 +16,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 123.0
-margin_bottom = 535.0
+margin_bottom = 35.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -28,14 +28,12 @@ __meta__ = {
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
 margin_right = 116.0
-margin_bottom = 500.0
 rect_min_size = Vector2( 100, 0 )
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="ImageGridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer"]
 margin_right = 116.0
-margin_bottom = 500.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -43,9 +41,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 504.0
+margin_top = 4.0
 margin_right = 116.0
-margin_bottom = 528.0
+margin_bottom = 28.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 3
@@ -68,4 +66,5 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="request_completed" from="SearchHTTPRequest" to="." method="_on_SearchHTTPRequest_request_completed"]
+[connection signal="text_entered" from="VBoxContainer/HBoxContainer/SearchLineEdit" to="." method="_on_SearchLineEdit_text_entered"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/SearchButton" to="." method="_on_SearchButton_pressed"]

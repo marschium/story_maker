@@ -58,15 +58,17 @@ func _input(event):
             for e in hovered_elements:
                 if not selected or e.get_index() < selected.get_index():
                     selected = e
-            current_selected_element = selected
-            selected.set_selected(true)
-            get_tree().set_input_as_handled()
+            if selected != null:
+                current_selected_element = selected
+                selected.set_selected(true)
+                get_tree().set_input_as_handled()
             
     if event is InputEventMouseButton \
     and event.button_index == BUTTON_LEFT \
     and not event.is_pressed() \
     and current_selected_element:
         current_selected_element.set_selected(false)
+        current_selected_element = null
         get_tree().set_input_as_handled()
     
     
@@ -77,9 +79,15 @@ func _on_PictureDownload_image_picked(image):
     current_scene.add_child(e)
     current_scene.move_child(e, 0)
     e.connect("mouse_entered", self, "_on_EditorElement_mouse_entered", [e])
+    e.connect("removed", self, "_on_EditorElement_tree_exit", [e])
     e.connect("mouse_exited", self, "_on_EditorElement_mouse_exited", [e])
     e.connect("z_index_changed", self, "_on_EditorElement_z_index_changed", [e])
     reorder_scene_children()
+    
+func _on_EditorElement_tree_exit(e):
+    current_selected_element = null
+    _on_EditorElement_mouse_exited(e)
+    remove_child(e)
     
 func _on_EditorElement_mouse_entered(e):
     hovered_elements.append(e)

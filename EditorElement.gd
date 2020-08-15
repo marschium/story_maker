@@ -1,6 +1,7 @@
 extends Area2D
 
 signal z_index_changed(d)
+signal removed()
 
 var bounds = Vector2(0,0)
 var button_down = false
@@ -45,17 +46,17 @@ func save_resources_to_packer(packer):
 func set_selected(f):
     button_down = f
 
-func _input(event):                
+func _input(event):      
     
-    # move
-    if event is InputEventMouseMotion and self.button_down:
+    if not self.button_down:
+        return
+    
+    if event is InputEventMouseMotion:
         position = event.position - mouse_offset 
         get_tree().set_input_as_handled()
     
-    # scale and rotate
     if event is InputEventMouseButton \
-    and event.button_index == BUTTON_WHEEL_DOWN \
-    and self.button_down:        
+    and event.button_index == BUTTON_WHEEL_DOWN:
         if self.shift_modify_key:
             rotation_degrees -= 10
         elif self.ctrl_modify_key:
@@ -64,8 +65,7 @@ func _input(event):
             scale = Vector2(scale.x - 0.05, scale.y - 0.05)
         
     if event is InputEventMouseButton \
-    and event.button_index == BUTTON_WHEEL_UP \
-    and self.button_down:
+    and event.button_index == BUTTON_WHEEL_UP:
         if self.shift_modify_key:
             rotation_degrees += 10
         elif self.ctrl_modify_key:
@@ -73,24 +73,9 @@ func _input(event):
         else:
             scale = Vector2(scale.x + 0.05, scale.y + 0.05)
 
-func _on_EditorElement_mouse_entered():
-    pass
-    #self.mouse_over = true
-
-
-func _on_EditorElement_mouse_exited():
-    pass
-    #self.mouse_over = false
-    #self.button_down = false
-
-
-#func _on_Button_button_down():    
-#    var e = get_global_mouse_position()
-#    self.mouse_offset = Vector2(e.x - position.x, e.y - position.y)
-#    self.button_down = true
-#    self.mouse_over = true
-#
-#
-#func _on_Button_button_up():  
-#    self.button_down = false
-#    self.mouse_over = false
+    if event is InputEventKey \
+    and event.scancode == KEY_DELETE \
+    and event.pressed:
+        emit_signal("removed")
+        set_process(false)
+        queue_free()

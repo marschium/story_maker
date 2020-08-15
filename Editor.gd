@@ -36,6 +36,13 @@ func _export_game():
     packer.add_file("res://main.tscn", "user://world.tscn")
     world.save_resources_to_packer(packer)
     packer.flush()
+    
+    var data_dir = OS.get_user_data_dir()
+    var exe_path = OS.get_executable_path()
+    OS.execute("copy", [exe_path, data_dir])
+    
+    OS.execute("powershell", ["-command", "Compress-Archive", "-Path",  data_dir, "-DestinationPath", "test.zip"])
+    
 
 func _on_MenuButton_save_selected():
     _export_game()

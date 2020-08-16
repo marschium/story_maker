@@ -8,8 +8,9 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    if OS.has_feature('__editor__'):
-        print("running editor")
+    var file2Check = File.new()
+    if file2Check.file_exists("res://editor.txt"):
+        print_debug("running editor")
         get_tree().change_scene("res://Editor.tscn")
     else:
         print("running runner")

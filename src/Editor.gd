@@ -37,10 +37,11 @@ func _export_game():
     world.save_resources_to_packer(packer)
     packer.flush()
     
+    var d = Directory.new()
     var data_dir = OS.get_user_data_dir()
-    var exe_path = OS.get_executable_path()
-    OS.execute("copy", [exe_path, data_dir])
-    
+    var exe = OS.get_executable_path()
+    d.copy(exe, data_dir + "/runner.exe")
+    d.copy("res://runner.pck", data_dir + "/runner.pck")
     OS.execute("powershell", ["-command", "Compress-Archive", "-Path",  data_dir, "-DestinationPath", "test.zip"])
     
 

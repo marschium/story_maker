@@ -37,12 +37,27 @@ func _export_game():
     world.save_resources_to_packer(packer)
     packer.flush()
     
+    var file_picker = FileDialog.new()
+    file_picker.add_filter("*.zip ; ZIP archives")
+    file_picker.access = 2 #ACCESS_FILESYSTEM 
+    file_picker.set_current_dir("user://")
+    add_child(file_picker)   
+    file_picker.popup(Rect2(0, 0, 500, 500)) 
+    file_picker.invalidate()
+    var f = yield(file_picker, "file_selected")
+    var f_exe = f.replace(".zip", ".exe").rsplit("/", true, 1)[1]
+    var f_pck = f_exe.replace(".exe", ".pck")
+    var f_folder = f_exe.replace(".exe", "")
+    
     var d = Directory.new()
     var data_dir = OS.get_user_data_dir()
     var exe = OS.get_executable_path()
-    d.copy(exe, data_dir + "/runner.exe")
-    d.copy("res://runner.pck", data_dir + "/runner.pck")
-    OS.execute("powershell", ["-command", "Compress-Archive", "-Path",  data_dir, "-DestinationPath", "test.zip"])
+    d.make_dir(data_dir + "/" + f_folder)
+    d.copy(exe, data_dir + "/" + f_folder + "/" + f_exe)
+    d.copy("user://world.tscn", data_dir + "/" + f_folder + "/world.tscn")
+    d.copy("user://game.pck", data_dir + "/" + f_folder + "/game.pck")
+    d.copy("res://runner.pck", data_dir + "/" + f_folder + "/" + f_pck)
+    OS.execute("powershell", ["-command", "Compress-Archive", "-Path",  data_dir + "/" + f_folder + "/", "-DestinationPath", f])
     
 
 func _on_MenuButton_save_selected():

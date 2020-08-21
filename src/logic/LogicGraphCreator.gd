@@ -80,6 +80,7 @@ func get_state_machine_dict():
             var from_option = from_node.slot_to_option(connection["from_port"])
             states_dict[from_node_name]["connections"][from_option] = states_dict[to_node_name]
     
-    # TODO error if no start
-    return states_dict[start_node_name]
+    if start_node_name:
+        return states_dict[start_node_name]
+    return {}
 

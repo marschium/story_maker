@@ -20,7 +20,8 @@ func add_scene():
     current_scene_idx += 1
     var s = Node2D.new()
     current_scene = s
-    add_child(s)
+    s.set_name("Scene %d" % current_scene_idx)
+    add_child(s, true)
     
 func change_to_scene(id):
     current_scene.visible = false
@@ -30,15 +31,26 @@ func change_to_scene(id):
 
 func get_scene_to_save():
     var root = Node2D.new()
+    var seen_first = false
+    var id = 0
     for scene in get_children():
+        var scene_node = Node2D.new()
+        root.add_child(scene_node)
+        scene_node.visible = false
+        scene_node.set_owner(root)
+        if not seen_first:
+            scene_node.visible = true
+            seen_first = true
         for child in scene.get_children():
             if child is editor_element_class:
                 var c = child.get_item_to_save()
-                root.add_child(c)
+                c.name = "Sprite%d" % id
+                scene_node.add_child(c)
                 c.set_owner(root)
+                id += 1
     return root
     
-func save_resources_to_packer(packer):   
+func save_resources_to_packer(packer):
     for scene in get_children(): 
         for child in scene.get_children():
             if child is editor_element_class:
@@ -46,8 +58,7 @@ func save_resources_to_packer(packer):
     
 func reorder_scene_children():
     for child in current_scene.get_children():
-        #child.set_layer(current_scene.get_child_count() - child.get_index())
-        child.find_node("Sprite").z_index = current_scene.get_child_count() - child.get_index()
+        child.find_node("Sprite*").z_index = current_scene.get_child_count() - child.get_index()
         
 func _input(event):
     if event is InputEventMouseButton \

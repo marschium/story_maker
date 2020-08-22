@@ -49,6 +49,7 @@ var current_state = StateNode.new()
 var current_scene_idx = 0
 
 func _create_state(dict):
+    print_debug(dict)
     if dict["$type"] == "dialogue":
         var s = DialogueNode.new()
         s.text = dict["text"]
@@ -83,10 +84,11 @@ func _ready():
 func setup():
     # TODO store the current scene so that multiple scenes can be played
     current_state = StateNode.new()
-    var current_scene_dict = state_dict["scenes"][current_scene_idx]
-    var first_state = _create_state(current_scene_dict)
-    _connect_state(first_state, current_scene_dict)
-    current_state.connections[""] = first_state
+    if not state_dict["scenes"][current_scene_idx].empty():
+        var current_scene_dict = state_dict["scenes"][current_scene_idx]
+        var first_state = _create_state(current_scene_dict)
+        _connect_state(first_state, current_scene_dict)
+        current_state.connections[""] = first_state
     
 func has_scenes_to_play():
     return current_scene_idx + 1 < len(state_dict["scenes"])

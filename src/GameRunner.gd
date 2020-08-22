@@ -8,6 +8,7 @@ var started
 var world 
 var current_scene_idx = 0
 
+# Called when the node enters the s
 # Called when the node enters the scene tree for the first time.
 func _ready():
     
@@ -15,7 +16,7 @@ func _ready():
     var World = ResourceLoader.load("res://main.tscn")
     
     world = World.instance()
-    add_child(world)
+    add_child(world, true)
     
     var state = World.get_state()
     for idx in range(0, state.get_node_count() ):
@@ -58,7 +59,6 @@ func _process(delta):
 
 func _on_StateMachine_dialogue(text, options):
     var res = yield(dialogue_node.show_dialogue(text, options), "completed")
-    # todo clear
     state_machine_node.next_state([res])
     
 func _on_StateMachine_set_value(name, value):
@@ -80,4 +80,3 @@ func _on_StateMachine_end():
         show_scene(current_scene_idx + 1)
         state_machine_node.next_scene()
         state_machine_node.next_state()
-    # TODO swap to new scene if there is one

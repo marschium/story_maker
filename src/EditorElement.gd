@@ -24,6 +24,7 @@ func _process(delta):
 func initalise(image):
     var tex = ImageTexture.new()
     tex.create_from_image(image)
+    tex.resource_local_to_scene = true
     var s = Sprite.new()
     s.texture = tex    
     s.set_name("Sprite")
@@ -35,6 +36,7 @@ func initalise(image):
     
 func get_item_to_save():
     var sprite = $Sprite.duplicate()
+    sprite.texture.resource_local_to_scene = true
     sprite.position = position
     sprite.scale = scale
     sprite.rotation = rotation

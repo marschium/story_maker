@@ -11,9 +11,8 @@ var value_store = preload("res://GameValueStore.tscn")
 
 func _ready():
     pass
-
-func _export_game():	
-    # images
+    
+func _save_to_user_data():
     var scene_to_save = world.get_scene_to_save()
     
     # global values
@@ -36,7 +35,8 @@ func _export_game():
     packer.add_file("res://main.tscn", "user://world.tscn")
     world.save_resources_to_packer(packer)
     packer.flush()
-    
+
+func _save_to_disk():      
     var file_picker = FileDialog.new()
     file_picker.add_filter("*.zip ; ZIP archives")
     file_picker.access = 2 #ACCESS_FILESYSTEM 
@@ -61,7 +61,8 @@ func _export_game():
     
 
 func _on_MenuButton_save_selected():
-    _export_game()
+    _save_to_user_data()
+    _save_to_disk()
 
 func _on_Scenes_scene_added():
     world.add_scene()
@@ -76,8 +77,8 @@ func _on_ScreenshotTimer_timeout():
     $VBoxContainer/HSplitContainer/TabContainer/Scenes.set_current_screenshot(screenshot)
 
 func _on_RunButton_pressed():
-    _export_game()
-    if OS.has_feature('editor'):
-        OS.execute("bin/runner.exe", [])
-    else:
-        OS.execute("runner.exe", [])
+    _save_to_user_data()
+    var d = Directory.new()
+    d.copy(OS.get_executable_path(), "user://runner.exe")
+    d.copy("runner.pck", "user://runner.pck")
+    OS.execute(OS.get_user_data_dir() + "/runner.exe", [])

@@ -18,7 +18,6 @@ func show_dialogue(text, options=[]):
         dialogue_label.queue_free()
     dialogue_label = DialogueLabel.instance()
     dialogue_label.text_to_show = text
-    dialogue_label.connect("finished", self, "_on_DialogueLabel_finished")
     $VBox/DialogueContainer.add_child(dialogue_label)
     dialogue_label.set_process(true)
     
@@ -34,7 +33,6 @@ func show_dialogue(text, options=[]):
             b.text = button_text
             b.connect("pressed", self, "_on_OptionButton_pressed", [option])
             $VBox/OptionContainer.add_child(b)
-        # TODO if no options auto finish after a small delay
         var res = yield(self, "dialogue_finished")
         return res
     else:

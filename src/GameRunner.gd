@@ -11,7 +11,6 @@ var current_scene_idx = 0
 # Called when the node enters the s
 # Called when the node enters the scene tree for the first time.
 func _ready():
-    
     var res = ProjectSettings.load_resource_pack(load_path)
     var World = ResourceLoader.load("res://main.tscn")
     
@@ -45,6 +44,9 @@ func _ready():
     state_machine_node.connect("check_value", self, "_on_StateMachine_check_value")
     
     show_scene(0)
+    
+    print_debug("resizing window")
+    OS.set_window_size(Vector2(1200, 900))
     
 func show_scene(id):
     current_scene_idx = id

@@ -14,7 +14,9 @@ __meta__ = {
 }
 load_path = "C:\\Users\\marsh\\AppData\\Roaming\\Godot\\app_userdata\\creator\\game.pck"
 
-[node name="GameDialogueContainer" parent="." instance=ExtResource( 2 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GameDialogueContainer" parent="CanvasLayer" instance=ExtResource( 2 )]
 margin_top = 600.0
 margin_right = 1600.0
 margin_bottom = 900.0

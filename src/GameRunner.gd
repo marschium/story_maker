@@ -11,6 +11,7 @@ var current_scene_idx = 0
 # Called when the node enters the s
 # Called when the node enters the scene tree for the first time.
 func _ready():
+    $CanvasLayer.scale = Vector2(0.75, 1)
     var res = ProjectSettings.load_resource_pack(load_path)
     var World = ResourceLoader.load("res://main.tscn")
     

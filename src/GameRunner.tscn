@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-load_path = "C:\\Users\\marsh\\AppData\\Roaming\\Godot\\app_userdata\\creator\\game.pck"
+load_path = "res://game.pck"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

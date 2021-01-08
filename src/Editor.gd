@@ -54,9 +54,9 @@ func _save_to_disk():
     var exe = OS.get_executable_path()
     d.make_dir(data_dir + "/" + f_folder)
     d.copy(exe, data_dir + "/" + f_folder + "/" + f_exe)
-    d.copy("user://world.tscn", data_dir + "/" + f_folder + "/world.tscn")
-    d.copy("user://game.pck", data_dir + "/" + f_folder + "/game.pck")
+    # d.copy("user://world.tscn", data_dir + "/" + f_folder + "/world.tscn")
     d.copy("res://runner.pck", data_dir + "/" + f_folder + "/" + f_pck)
+    d.copy("user://game.pck", data_dir + "/" + f_folder + "/game.pck")
     OS.execute("powershell", ["-command", "Compress-Archive", "-Path",  data_dir + "/" + f_folder + "/", "-DestinationPath", f])
     
 

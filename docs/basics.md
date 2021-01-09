@@ -20,3 +20,11 @@ To try out your story press the `run` button in the toolbar. This will launch yo
 ## Releasing
 
 The export your story select `File -> Export` from toolbar. This will create a zip folder that contains everything needed to distribute and run your story.
+
+### Desktop app
+
+A windows version can be distributed using the `.exe` and both `.pck` files contained in the exported zip file.
+
+### HTML
+
+The `html_export` folder in the exported zip file contains everything needed to distrubute a html/wasm version.

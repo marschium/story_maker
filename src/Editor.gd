@@ -54,9 +54,14 @@ func _save_to_disk():
     var exe = OS.get_executable_path()
     d.make_dir(data_dir + "/" + f_folder)
     d.copy(exe, data_dir + "/" + f_folder + "/" + f_exe)
-    # d.copy("user://world.tscn", data_dir + "/" + f_folder + "/world.tscn")
-    d.copy("res://runner.pck", data_dir + "/" + f_folder + "/" + f_pck)
+    d.copy("res://bin/runner.pck", data_dir + "/" + f_folder + "/" + f_pck)
     d.copy("user://game.pck", data_dir + "/" + f_folder + "/game.pck")
+    
+    var html_export_dest = data_dir + "/" + f_folder + "/html_export.zip"
+    d.copy("res://bin/html_export.zip", html_export_dest)
+    OS.execute("powershell", ["-command", "Expand-Archive", "-Path",  html_export_dest, "-DestinationPath", data_dir + "/" + f_folder + "/html_export"])
+    d.remove(html_export_dest)
+    d.copy("user://game.pck",  data_dir + "/" + f_folder + "/html_export/game.pck")    
     OS.execute("powershell", ["-command", "Compress-Archive", "-Path",  data_dir + "/" + f_folder + "/", "-DestinationPath", f])
     
 
@@ -80,5 +85,5 @@ func _on_RunButton_pressed():
     _save_to_user_data()
     var d = Directory.new()
     d.copy(OS.get_executable_path(), "user://runner.exe")
-    d.copy("runner.pck", "user://runner.pck")
-    OS.execute(OS.get_user_data_dir() + "/runner.exe", [])
+    d.copy("res://bin/runner.pck", "user://runner.pck")
+    OS.execute(OS.get_user_data_dir() + "/runner.exe", [OS.get_user_data_dir() + "/game.pck"])

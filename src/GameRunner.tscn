@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-load_path = "res://game.pck"
+load_path = "./game.pck"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
